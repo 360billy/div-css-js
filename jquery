@@ -1,0 +1,34 @@
+$(function() {
+  var $this = $("#news");
+  var scrollTimer;
+  $this.hover(function() {
+     clearInterval(scrollTimer);
+  }, function() {
+  scrollTimer = setInterval(function() {
+  scrollNews($this);
+  }, 8000);
+  }).trigger("mouseleave");
+  function scrollNews(obj) {
+    var $self = obj.find("ul");
+    var lineHeight = $self.find("li:first").height();
+    $self.animate({
+    "marginTop": -lineHeight + "px"
+    }, 1000, function() {
+    $self.css({
+    marginTop: 0
+    }).find("li:first").appendTo($self);
+    })
+  }
+});
+
+$(".dvtitle a").each(function(i){
+    this.onclick=function(){
+    $(this).attr("class","on").siblings().removeClass('on');
+    $(".dvbtm").hide();
+    $("#dvbtm"+i.toString()).show();
+    if(i==2){
+      _selhuoqilog();
+    }
+    return false;
+  };
+});
